@@ -6,26 +6,26 @@ Cette project est un logiciel qui vise a rendre les fangame a but non-lucratif p
 
 | Persona | Description |
 |---------|-------------|
-| **Name** | [Mike] |
-| **Tranche Âge** | [22] |
-| **Profession** | [Webdev : Backend] |
-| **Objectifs** | [Fangame submiter] |
-| **Frustrations** | [not being able change the url] [not being able upload the source code] |
-| **Comportements** | [frequently update the archive page for it to be up to date] |
+| **Name** | Mike |
+| **Age** | 22 |
+| **Profession** | Webdev : Backend |
+| **Objectifs** | Fangame submiter |
+| **Frustrations** | not being able change the url not being able upload the source code |
+| **Comportements** | frequently update the archive page for it to be up to date |
 
 | Persona 2 | Description |
 |---------|-------------|
-| **Name** | [Tom] |
-| **Tranche Âge** | [27] |
-| **Profession** | [CyberSecurity] |
-| **Role** | [Admin/Moderator] |
-| **Frustrations** | [not being able verify on release] |
-| **Comportements** | [checks the current fangames and for any malicius apps] |
+| **Name** | Tom |
+| **Age** | 27 |
+| **Profession** | CyberSecurity |
+| **Role** | Admin/Moderator |
+| **Frustrations** | not being able verify on release |
+| **Comportements** | checks the current fangames and for any malicius apps |
 
 | Persona 3 | Description |
 |---------|-------------|
-| **Name** | [David] |
-| **Tranche Âge** | [20] |
-| **Role** | [Site User] |
-| **Frustrations** | [not being able to search for specifc stuff] [not being able to filter by category] |
-| **Comportements** | [checks the current fangames and for any malicius apps] |
+| **Name** | David |
+| **Age** | 20 |
+| **Role** | Site User |
+| **Frustrations** | not being able to search for specifc stuff] not being able to filter by category] |
+| **Comportements** | checks the current fangames and for any malicius apps] |
