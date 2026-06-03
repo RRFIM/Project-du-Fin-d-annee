@@ -27,5 +27,34 @@ Cette project est un logiciel qui vise a rendre les fangame a but non-lucratif p
 | **Name** | David |
 | **Age** | 20 |
 | **Role** | Site User |
-| **Frustrations** | not being able to search for specifc stuff] not being able to filter by category] |
-| **Comportements** | checks the current fangames and for any malicius apps] |
+| **Frustrations** | not being able to search for specifc stuff not being able to filter by category |
+| **Comportements** | checks the current fangames and for any malicius apps |
+
+
+# Epic 1: 
+
+## US 1 : En tant que visiteur, je veux télécharger de fangames
+    -CA 1 : No account needed to download small games
+    -CA 2 : If the game is too big visitor is forced to make an account
+    -CA 3 : Accept the terms of service to download fangames
+
+## US 2 : En tant que utilisateur, je veux mettre en favourie
+    -CA 1 : Can organise the favorites with lists
+    -CA 2 : Can Remove a Game from favorites
+    -CA 3 : Can Share them 
+
+## US 3 : En tant que developpeur, je veux télécharger mon fangame et code source
+    - CA 1 : Put multiple versions of the game and source code 
+    - CA 2 : Can private the access to the assets
+
+## US 4 : En tant que developpeur, je veux modifier la page et lien de jeu 
+    - CA 1 : Can edit the background and the layout of the page manually
+    - CA 2 : Can edit the link and where they bring the user
+    - CA 3 : Can the access to the source code directory
+
+## US 5 : En tant que modérateur, je veux teste le fangame pour moderation
+    - CA 1 : Can access to a early build of the game of regulation
+    - CA 3 : Can acess to the a preview of the archive page
+    - CA 2 : Can inspect the code repsitory for regulation 
+
+
