@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
+use App\Config\UserStatus;
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
 class User
 {
     #[ORM\Id]
@@ -14,8 +15,11 @@ class User
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    #[ORM\Column]
+    private ?bool $is_subscribed_to_newsletter = null;
+
+    #[ORM\Column]
+    private ?bool $has_badge = null;
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
@@ -23,28 +27,43 @@ class User
     #[ORM\Column(length: 255)]
     private ?string $password = null;
 
-    #[ORM\ManyToOne(inversedBy: 'user_id')]
-    private ?Comment $comment = null;
+    #[ORM\Column(length: 255)]
+    private ?string $firstname = null;
 
-    #[ORM\ManyToOne(inversedBy: 'uploader_id')]
-    private ?Game $game = null;
+    #[ORM\Column(length: 255)]
+    private ?string $lastname = null;
 
-    #[ORM\ManyToOne(inversedBy: 'user_id')]
-    private ?Announcement $announcement = null;
+    #[ORM\Column(length: 255)]
+    private ?string $picture_url = null;
+
+    #[ORM\Column(type: Types::SIMPLE_ARRAY, enumType: UserStatus::class)]
+    private array $status = [];
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function isSubscribedToNewsletter(): ?bool
     {
-        return $this->name;
+        return $this->is_subscribed_to_newsletter;
     }
 
-    public function setName(string $name): static
+    public function setIsSubscribedToNewsletter(bool $is_subscribed_to_newsletter): static
     {
-        $this->name = $name;
+        $this->is_subscribed_to_newsletter = $is_subscribed_to_newsletter;
+
+        return $this;
+    }
+
+    public function hasBadge(): ?bool
+    {
+        return $this->has_badge;
+    }
+
+    public function setHasBadge(bool $has_badge): static
+    {
+        $this->has_badge = $has_badge;
 
         return $this;
     }
@@ -73,50 +92,53 @@ class User
         return $this;
     }
 
-    public function getGameId(): ?Comment
+    public function getFirstname(): ?string
     {
-        return $this->game_id;
+        return $this->firstname;
     }
 
-    public function setGameId(?Comment $game_id): static
+    public function setFirstname(string $firstname): static
     {
-        $this->game_id = $game_id;
+        $this->firstname = $firstname;
 
         return $this;
     }
 
-    public function getComment(): ?Comment
+    public function getLastname(): ?string
     {
-        return $this->comment;
+        return $this->lastname;
     }
 
-    public function setComment(?Comment $comment): static
+    public function setLastname(string $lastname): static
     {
-        $this->comment = $comment;
+        $this->lastname = $lastname;
 
         return $this;
     }
 
-    public function getGame(): ?Game
+    public function getPictureUrl(): ?string
     {
-        return $this->game;
+        return $this->picture_url;
     }
 
-    public function setGame(?Game $game): static
+    public function setPictureUrl(string $picture_url): static
     {
-        $this->game = $game;
+        $this->picture_url = $picture_url;
 
         return $this;
     }
 
-    public function getAnnouncement(): ?Announcement
+    /**
+     * @return UserStatus[]
+     */
+    public function getStatus(): array
     {
-        return $this->announcement;
+        return $this->status;
     }
 
-    public function setAnnouncement(?Announcement $announcement): static
+    public function setStatus(array $status): static
     {
-        $this->announcement = $announcement;
+        $this->status = $status;
 
         return $this;
     }

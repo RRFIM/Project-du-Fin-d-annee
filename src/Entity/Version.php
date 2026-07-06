@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\VersionRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: VersionRepository::class)]
@@ -20,17 +18,6 @@ class Version
 
     #[ORM\Column]
     private ?int $version_number = null;
-
-    /**
-     * @var Collection<int, Game>
-     */
-    #[ORM\OneToMany(targetEntity: Game::class, mappedBy: 'version')]
-    private Collection $game_id;
-
-    public function __construct()
-    {
-        $this->game_id = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -57,36 +44,6 @@ class Version
     public function setVersionNumber(int $version_number): static
     {
         $this->version_number = $version_number;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Game>
-     */
-    public function getGameId(): Collection
-    {
-        return $this->game_id;
-    }
-
-    public function addGameId(Game $gameId): static
-    {
-        if (!$this->game_id->contains($gameId)) {
-            $this->game_id->add($gameId);
-            $gameId->setVersion($this);
-        }
-
-        return $this;
-    }
-
-    public function removeGameId(Game $gameId): static
-    {
-        if ($this->game_id->removeElement($gameId)) {
-            // set the owning side to null (unless already changed)
-            if ($gameId->getVersion() === $this) {
-                $gameId->setVersion(null);
-            }
-        }
 
         return $this;
     }

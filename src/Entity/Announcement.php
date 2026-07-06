@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\AnnouncementRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AnnouncementRepository::class)]
@@ -29,17 +27,6 @@ class Announcement
 
     #[ORM\Column]
     private ?bool $is_approved = null;
-
-    /**
-     * @var Collection<int, User>
-     */
-    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'announcement')]
-    private Collection $user_id;
-
-    public function __construct()
-    {
-        $this->user_id = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -102,36 +89,6 @@ class Announcement
     public function setIsApproved(bool $is_approved): static
     {
         $this->is_approved = $is_approved;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUserId(): Collection
-    {
-        return $this->user_id;
-    }
-
-    public function addUserId(User $userId): static
-    {
-        if (!$this->user_id->contains($userId)) {
-            $this->user_id->add($userId);
-            $userId->setAnnouncement($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserId(User $userId): static
-    {
-        if ($this->user_id->removeElement($userId)) {
-            // set the owning side to null (unless already changed)
-            if ($userId->getAnnouncement() === $this) {
-                $userId->setAnnouncement(null);
-            }
-        }
 
         return $this;
     }

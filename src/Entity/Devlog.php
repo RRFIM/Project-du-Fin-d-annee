@@ -16,15 +16,14 @@ class Devlog
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column]
-    private ?\DateTime $description = null;
+    #[ORM\Column(length: 255)]
+    private ?string $description = null;
 
     #[ORM\Column]
     private ?\DateTime $created_at = null;
 
     #[ORM\Column]
     private ?\DateTime $updated_at = null;
-
 
     public function getId(): ?int
     {
@@ -43,12 +42,12 @@ class Devlog
         return $this;
     }
 
-    public function getDescription(): ?\DateTime
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription(\DateTime $description): static
+    public function setDescription(string $description): static
     {
         $this->description = $description;
 
@@ -66,7 +65,7 @@ class Devlog
 
         return $this;
     }
-    
+
     public function getUpdatedAt(): ?\DateTime
     {
         return $this->updated_at;
@@ -78,5 +77,4 @@ class Devlog
 
         return $this;
     }
-
 }

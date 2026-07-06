@@ -19,9 +19,6 @@ class Topic
     #[ORM\Column]
     private ?\DateTime $created_at = null;
 
-    #[ORM\ManyToOne(inversedBy: 'topic_id')]
-    private ?Topicpost $topicpost = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -47,18 +44,6 @@ class Topic
     public function setCreatedAt(\DateTime $created_at): static
     {
         $this->created_at = $created_at;
-
-        return $this;
-    }
-
-    public function getTopicpost(): ?Topicpost
-    {
-        return $this->topicpost;
-    }
-
-    public function setTopicpost(?Topicpost $topicpost): static
-    {
-        $this->topicpost = $topicpost;
 
         return $this;
     }

@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\GameRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GameRepository::class)]
@@ -45,36 +43,7 @@ class Game
     #[ORM\Column]
     private ?int $nb_player_max = null;
 
-    
-    #[ORM\ManyToOne(inversedBy: 'game_id')]
-    private ?Comment $comment = null;
 
-    /**
-     * @var Collection<int, User>
-     */
-    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'game')]
-    private Collection $uploader_id;
-
-    #[ORM\ManyToOne(inversedBy: 'game_id')]
-    private ?Image $image = null;
-
-    /**
-     * @var Collection<int, Platform>
-     */
-    #[ORM\ManyToMany(targetEntity: Platform::class, mappedBy: 'game_id')]
-    private Collection $platforms;
-
-    #[ORM\ManyToOne(inversedBy: 'game_id')]
-    private ?Devlog $devlog = null;
-
-    #[ORM\ManyToOne(inversedBy: 'game_id')]
-    private ?Version $version = null;
-
-    public function __construct()
-    {
-        $this->uploader_id = new ArrayCollection();
-        $this->platforms = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -201,110 +170,4 @@ class Game
         return $this;
     }
 
-    
-
-    public function getComment(): ?Comment
-    {
-        return $this->comment;
-    }
-
-    public function setComment(?Comment $comment): static
-    {
-        $this->comment = $comment;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUploaderId(): Collection
-    {
-        return $this->uploader_id;
-    }
-
-    public function addUploaderId(User $uploaderId): static
-    {
-        if (!$this->uploader_id->contains($uploaderId)) {
-            $this->uploader_id->add($uploaderId);
-            $uploaderId->setGame($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUploaderId(User $uploaderId): static
-    {
-        if ($this->uploader_id->removeElement($uploaderId)) {
-            // set the owning side to null (unless already changed)
-            if ($uploaderId->getGame() === $this) {
-                $uploaderId->setGame(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getImage(): ?Image
-    {
-        return $this->image;
-    }
-
-    public function setImage(?Image $image): static
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Platform>
-     */
-    public function getPlatforms(): Collection
-    {
-        return $this->platforms;
-    }
-
-    public function addPlatform(Platform $platform): static
-    {
-        if (!$this->platforms->contains($platform)) {
-            $this->platforms->add($platform);
-            $platform->addGameId($this);
-        }
-
-        return $this;
-    }
-
-    public function removePlatform(Platform $platform): static
-    {
-        if ($this->platforms->removeElement($platform)) {
-            $platform->removeGameId($this);
-        }
-
-        return $this;
-    }
-
-    public function getDevlog(): ?Devlog
-    {
-        return $this->devlog;
-    }
-
-    public function setDevlog(?Devlog $devlog): static
-    {
-        $this->devlog = $devlog;
-
-        return $this;
-    }
-
-    public function getVersion(): ?Version
-    {
-        return $this->version;
-    }
-
-    public function setVersion(?Version $version): static
-    {
-        $this->version = $version;
-
-        return $this;
-    }
 }
