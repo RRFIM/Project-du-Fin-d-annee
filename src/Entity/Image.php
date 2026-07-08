@@ -19,6 +19,10 @@ class Image
     #[ORM\Column(length: 255)]
     private ?string $file_type = null;
 
+    #[ORM\ManyToOne(inversedBy: 'images')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Game $game = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +48,18 @@ class Image
     public function setFileType(string $file_type): static
     {
         $this->file_type = $file_type;
+
+        return $this;
+    }
+
+    public function getGame(): ?Game
+    {
+        return $this->game;
+    }
+
+    public function setGame(?Game $gameimages): static
+    {
+        $this->game = $gameimages;
 
         return $this;
     }

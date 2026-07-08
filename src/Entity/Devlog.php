@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\DevlogRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use function Symfony\Component\Clock\now;
 
 #[ORM\Entity(repositoryClass: DevlogRepository::class)]
 class Devlog
@@ -20,10 +22,12 @@ class Devlog
     private ?string $description = null;
 
     #[ORM\Column]
-    private ?\DateTime $created_at = null;
+    private ?DateTime $created_at = null;
 
-    #[ORM\Column]
-    private ?\DateTime $updated_at = null;
+
+    #[ORM\ManyToOne(inversedBy: 'devlogs')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Game $game = null;
 
     public function getId(): ?int
     {
@@ -54,26 +58,26 @@ class Devlog
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTime $created_at): static
+    public function setCreatedAt(DateTime $created_at): static
     {
         $this->created_at = $created_at;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTime
+    public function getGame(): ?Game
     {
-        return $this->updated_at;
+        return $this->game;
     }
 
-    public function setUpdatedAt(\DateTime $updated_at): static
+    public function setGame(?Game $game): static
     {
-        $this->updated_at = $updated_at;
+        $this->game = $game;
 
         return $this;
     }
