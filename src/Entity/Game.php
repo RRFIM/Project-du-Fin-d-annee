@@ -87,7 +87,6 @@ class Game
     /**
      * @var Collection<int, User>
      */
-    #[JoinTable(name: 'download')]
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'downloads')]
     private Collection $downloads;
 

@@ -94,6 +94,7 @@ class User
     /**
      * @var Collection<int, Game>
      */
+    #[ORM\JoinTable(name: 'download')]
     #[ORM\ManyToMany(targetEntity: Game::class, inversedBy: 'downloads')]
     private Collection $downloads;
 
