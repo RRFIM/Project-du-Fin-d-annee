@@ -28,6 +28,10 @@ class Announcement
     #[ORM\Column]
     private ?bool $is_approved = null;
 
+    #[ORM\ManyToOne(inversedBy: 'announcements')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +93,18 @@ class Announcement
     public function setIsApproved(bool $is_approved): static
     {
         $this->is_approved = $is_approved;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\BadgeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BadgeRepository::class)]
@@ -18,6 +20,17 @@ class Badge
 
     #[ORM\Column(length: 255)]
     private ?string $picture_url = null;
+
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'badges')]
+    private Collection $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -44,6 +57,33 @@ class Badge
     public function setPictureUrl(string $picture_url): static
     {
         $this->picture_url = $picture_url;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addBadge($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeBadge($this);
+        }
 
         return $this;
     }

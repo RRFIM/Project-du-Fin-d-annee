@@ -19,6 +19,10 @@ class Version
     #[ORM\Column]
     private ?int $version_number = null;
 
+    #[ORM\ManyToOne(inversedBy: 'versions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Game $game = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +48,18 @@ class Version
     public function setVersionNumber(int $version_number): static
     {
         $this->version_number = $version_number;
+
+        return $this;
+    }
+
+    public function getGame(): ?Game
+    {
+        return $this->game;
+    }
+
+    public function setGame(?Game $gameversion): static
+    {
+        $this->game = $gameversion;
 
         return $this;
     }
