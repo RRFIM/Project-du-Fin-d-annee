@@ -4,35 +4,66 @@
 
 {% block body %}
     <form method="post">
-        {% if error %}
+        <section>
+             <header class="flex flex-col bg-[#078ADB] text-white rounded-b-lg h-34">
+                    <div class="flex items-center">
+                        <img src="{{asset("/icons/Header/Vector.svg")}}" class="py-3 px-3">
+                        <h1 class="text-[32px]">FanGame Archive</h1>
+                    </div>
+        
+                    <h2 class="px-27 text-[24px]">always expanding and changing</h2>
+                </header>
+            {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+            {% endif %}   
 
-        {% if app.user %}
+            {% if app.user %}
             <div class="mb-3">
                 You are logged in as {{ app.user.userIdentifier }}, <a href="{{ logout_path() }}">Logout</a>
             </div>
         {% endif %}
+        <div class="flex flex-col gap-y-5 px-20 py-4 w-92">
+            <div class="flex items-center px-5.5 py-3 justify-between rounded-3xl bg-[#d9d9d9]">
+                <a href="{{path("app_login")}}" class="rounded-2xl bg-[#A1A1A1] px-6 py-3">
+                    <button>Login</button>
+                </a>
+                
+                <a href="{{path("app_register")}}">
+                    <button>Register</button>
+                </a>
+            </div>
 
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="username">Email</label>
-        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
-        <label for="password">Password</label>
-        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
-        <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+            <div class="flex flex-col">
+                <label for="username">Email</label>
+                <div> 
+                    <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control bg-[#D9D9D9] border border-solid border-black px-4 py-1 rounded-tr-lg" autocomplete="email" required autofocus>
+                </div>
+            </div>
 
+            <div class="flex flex-col">
+                <label for="password">Password</label>
+                <div>
+                    <input type="password" name="_password" id="password" class="form-control bg-[#D9D9D9] border border-solid border-black px-4 py-1 rounded-tr-lg" autocomplete="current-password" required>
+                </div>
+            </div>
+
+            <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+            
+            <button class="btn btn-lg btn-primary flex bg-black text-white h-12 w-40 rounded-xl justify-center items-center" type="submit">
+                Login
+            </button>
+        </div>
+        
         {#
             Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
             See https://symfony.com/doc/current/security/remember_me.html
-
+            
             <div class="checkbox mb-3">
                 <input type="checkbox" name="_remember_me" id="_remember_me">
                 <label for="_remember_me">Remember me</label>
             </div>
-        #}
-
-        <button class="btn btn-lg btn-primary" type="submit">
-            Sign in
-        </button>
+            #}
+            
+        </section>
     </form>
 {% endblock %}

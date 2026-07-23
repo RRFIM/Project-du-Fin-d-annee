@@ -23,7 +23,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?bool $is_subscribed_to_newsletter = null;
+    private ?bool $is_subscribed_to_newsletter = false;
 
     #[ORM\Column(length: 180)]
     private ?string $email = null;
@@ -38,7 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $picture_url = null;
+    private ?string $picture_url = "assets/images/profilepic.jpg";
 
     /**
      * @var list<string> The user roles
