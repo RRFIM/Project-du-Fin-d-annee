@@ -222,3 +222,173 @@ erDiagram
     Admin ||--o{ Page : aprove
     Submiter ||--o{ Announcement : create
 ``` -->
+
+
+```mermaid
+erDiagram
+
+    USER {
+        INT id PK
+        BOOLEAN is_subscribed_to_newsletter
+        VARCHAR email
+        VARCHAR password
+        VARCHAR firstname
+        VARCHAR lastname
+        VARCHAR picture_url
+        VARCHAR status
+    }
+
+    GAME {
+        INT id PK
+        VARCHAR title
+        VARCHAR description
+        VARCHAR meta_description
+        INT download_rate
+        BOOLEAN is_approved
+        VARCHAR online_game_url
+        VARCHAR source_code_url
+        VARCHAR browser_version
+        VARCHAR requirements
+        INT nb_player_max
+        INT submitter_id FK
+        INT uploads_id FK
+    }
+
+    ANNOUNCEMENT {
+        INT id PK
+        VARCHAR title
+        VARCHAR description
+        DATETIME created_at
+        DATETIME updated_at
+        BOOLEAN is_approved
+        INT user_id FK
+    }
+
+    BADGE {
+        INT id PK
+        VARCHAR title
+        VARCHAR picture_url
+    }
+
+    COMMENT {
+        INT id PK
+        VARCHAR content
+        INT user_id FK
+        INT game_id FK
+    }
+
+    DEVLOG {
+        INT id PK
+        VARCHAR title
+        VARCHAR description
+        DATETIME created_at
+        INT game_id FK
+    }
+
+    IMAGE {
+        INT id PK
+        VARCHAR url
+        VARCHAR file_type
+        INT game_id FK
+    }
+
+    PLATFORM {
+        INT id PK
+        VARCHAR name
+    }
+
+    REVIEW {
+        INT id PK
+        VARCHAR content
+        INT game_id FK
+        INT user_id FK
+    }
+
+    TOPIC {
+        INT id PK
+        VARCHAR post_title
+        DATETIME created_at
+        INT user_id FK
+    }
+
+    TOPICPOST {
+        INT id PK
+        VARCHAR post_title
+        VARCHAR post_description
+        DATETIME created_at
+        INT topic_id FK
+        INT user_id FK
+    }
+
+    VERSION {
+        INT id PK
+        VARCHAR source_path
+        INT version_number
+        INT game_id FK
+    }
+
+    MESSENGER_MESSAGES {
+        INT id PK
+        CLOB body
+        CLOB headers
+        VARCHAR queue_name
+        DATETIME created_at
+        DATETIME available_at
+        DATETIME delivered_at
+    }
+
+    FAVORITE {
+        INT game_id PK,FK
+        INT user_id PK,FK
+    }
+
+    WISHLIST {
+        INT game_id PK,FK
+        INT user_id PK,FK
+    }
+
+    USER_BADGE {
+        INT user_id PK,FK
+        INT badge_id PK,FK
+    }
+
+    DOWNLOAD {
+        INT user_id PK,FK
+        INT game_id PK,FK
+    }
+
+    %% Relations
+
+    USER ||--o{ ANNOUNCEMENT : creates
+
+    USER ||--o{ COMMENT : writes
+    GAME ||--o{ COMMENT : receives
+
+    GAME ||--o{ DEVLOG : has
+
+    USER ||--o{ GAME : submits
+    USER ||--o{ GAME : uploads
+
+    GAME ||--o{ IMAGE : contains
+
+    USER ||--o{ REVIEW : writes
+    GAME ||--o{ REVIEW : receives
+
+    USER ||--o{ TOPIC : creates
+    TOPIC ||--o{ TOPICPOST : contains
+    USER ||--o{ TOPICPOST : writes
+
+    GAME ||--o{ VERSION : has
+
+    USER ||--o{ FAVORITE : owns
+    GAME ||--o{ FAVORITE : is_favorite
+
+    USER ||--o{ WISHLIST : owns
+    GAME ||--o{ WISHLIST : is_wished
+
+    USER ||--o{ DOWNLOAD : downloads
+    GAME ||--o{ DOWNLOAD : downloaded
+
+    USER ||--o{ USER_BADGE : earns
+    BADGE ||--o{ USER_BADGE : assigned
+```

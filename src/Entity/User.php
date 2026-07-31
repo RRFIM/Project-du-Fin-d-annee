@@ -38,7 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $picture_url = "assets/images/profilepic.jpg";
+    private ?string $picture_url = "/icons/Header/BaseProfilePicture.svg";
 
     /**
      * @var list<string> The user roles
