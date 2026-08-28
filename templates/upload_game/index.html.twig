@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UploadGameController!{% endblock %}
+
+{% block body %}
+<section>
+    <header>
+        <div class="flex flex-col bg-[#078ADB] text-white min-h-36 justify-between items-start">
+            <div class="flex justify-between w-full">
+                <div class="flex">
+                    <img src="{{ asset('/icons/Header/Logo.svg') }}" class="p-3 flex-2">
+                    <h1 class="text-[32px]">FanGame Archive</h1>
+                </div>
+                <div class="flex gap-x-5 px-5">
+                    <img class="flex-5" src="{{ asset('/icons/Header/Door.svg') }}">
+                    <img class="flex-4" src="{{ asset('/icons/Header/Search.svg') }}">
+                </div>
+            </div>
+
+            <div class="flex justify-between w-full">
+                <h2 class="px-27 text-[24px] flex-46">always expanding and changing</h2>
+                <p>{{ user.username }}</p>
+                
+                <img src="{{ asset('icons/Header/BaseProfilePicture.svg') }}" class="flex-2 px-6 py-4">
+            </div>
+        </div>
+
+
+
+        <div class="flex px-10 gap-x-70 bg-[#0477BF] text-black rounded-b-2xl h-14">
+            <button>Announcements</button>
+            <button>Recent Submitions</button>
+            <button>Most High Favorited</button>
+            <button>Your Favoites</button>
+            <button>Profile</button>
+            <button>Forum</button>
+        </div>
+    </header>
+    <div class="bg-red-700">
+        {{ form_start(uploadgameForm) }}
+             <button type="submit">Upload</button>
+        {{ form_end(uploadgameForm) }}
+    </div>
+</section>
+{% endblock %}
