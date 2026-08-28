@@ -45,7 +45,7 @@ final class UploadGameController extends AbstractController
             $game->setSubmitter($user);
             $Uploads = $game->setUploads($user);
             $game->setIsApproved(true);
-            $game->setOnlineGameUrl('/browser/x'); // WIP will do when coding online playing feature...
+            $game->setOnlineGameUrl('/browser/x'); // WIP will do when coding online playing
 
             //saves the changes
             $em->persist($game);
